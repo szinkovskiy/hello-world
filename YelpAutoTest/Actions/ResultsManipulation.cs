@@ -34,7 +34,7 @@ namespace YelpAutoTest
             foreach (var item in restaurantsData)
             {
                 Console.WriteLine($"{item.Name} - {item.Distance}");
-                distances.Add(ParseDistanceAndConvertItToMiles(item.Distance));
+                distances.Add(ParseDistanceAndConvertItToMiles(item.Distance?? "0"));
             }
             
             Console.WriteLine("==============================================");

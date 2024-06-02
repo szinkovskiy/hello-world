@@ -1,29 +1,21 @@
 using NUnit.Framework;
-using OpenQA.Selenium.Appium.Android;
 
-namespace YelpAutoTest
+namespace YelpAutoTest.Tests
 {
     public class BaseTest
     {
-        protected AndroidDriver driver;
-        protected Autorization auth;
-        protected Filtering filter;
-        protected ResultsManipulation results;
+        protected AppManager app;
 
         [SetUp]
         public void Setup()
         {
-            driver = new MobileDriver().RunApp();
-            
-            auth = new Autorization(driver);
-            filter = new Filtering(driver);
-            results = new ResultsManipulation(driver);
+            app = new AppManager();
         }
 
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            app.Stop();
         }
     }
 }

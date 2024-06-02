@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace YelpAutoTest
+namespace YelpAutoTest.Tests
 {
     public class UiTests : BaseTest
     {
@@ -8,9 +8,9 @@ namespace YelpAutoTest
         [Category("UI")]
         public void RestaurantsShouldBeSortedByDistanceAscIfDistanceFilterWasApplied()
         {
-            auth.AnonymousUserNavigatesToHomeScreen();
-            filter.UserFiltersRestaurantsByDistance();
-            results.RestaurantsAreFilteredByDistanceInResultsPanel();
+            app.Auth.AnonymousUserNavigatesToHomeScreen();
+            app.Filter.UserFiltersRestaurantsByDistance();
+            app.Results.RestaurantsAreFilteredByDistanceInResultsPanel();
         }
     }
 }

@@ -40,24 +40,22 @@ namespace YelpAutoTest
 
             for (int i = 0; i < attempts; i++)
             {
-                if (driver.FindElements(by).Count > 0)
+                var elements = driver.FindElements(by);
+
+                if (elements.Any())
                 {
                     new Actions(driver)
-                        .MoveToElement(driver.FindElement(by))
+                        .MoveToElement(elements.First())
                         .Click()
                         .Perform();
-                    break;
+                    return;  // Element found and clicked, exit the method
                 }
-                else
-                {
-                    Thread.Sleep(TimeSpan.FromSeconds(1));
-                }
-
-                if (i == attempts - 1)
-                {
-                    throw new NoSuchElementException($"Element not found! Locator: {by}");
-                }
+        
+                Thread.Sleep(TimeSpan.FromSeconds(1));
             }
+
+            // If we exhaust all attempts and don't find the element, throw an exception
+            throw new NoSuchElementException($"Element not found! Locator: {by}");
         }
 
         public static bool IsElementPresent(this AndroidDriver driver, By by)
