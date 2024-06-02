@@ -1,7 +1,4 @@
-[https://www.youtube.com/watch?v=tRPbgKMW2hQ]
-(https://www.youtube.com/watch?v=tRPbgKMW2hQ)
-
-[![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=tRPbgKMW2hQ-Y "Everything Is AWESOME")
+https://youtu.be/tRPbgKMW2hQ
 
 ```
 1. Taco Bell - 400 ft
