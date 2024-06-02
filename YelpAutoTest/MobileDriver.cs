@@ -1,6 +1,5 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 
@@ -44,7 +43,7 @@ namespace YelpAutoTest
 
                 if (elements.Any())
                 {
-                    new Actions(driver)
+                    new OpenQA.Selenium.Interactions.Actions(driver)
                         .MoveToElement(elements.First())
                         .Click()
                         .Perform();
@@ -79,7 +78,7 @@ namespace YelpAutoTest
         
         public static void SwipeElementOnScreen(this AndroidDriver driver, AppiumElement el, int endX, int endY)
         {
-            new Actions(driver)
+            new OpenQA.Selenium.Interactions.Actions(driver)
                 .MoveToElement(el)
                 .ClickAndHold()
                 .MoveToLocation(endX, endY)
@@ -88,7 +87,7 @@ namespace YelpAutoTest
         
         public static void SwipeScreenByCoordinates(this AndroidDriver driver, int startX, int startY, int endX, int endY)
         {
-            new Actions(driver)
+            new OpenQA.Selenium.Interactions.Actions(driver)
                 .MoveToLocation(startX, startY)
                 .ClickAndHold()
                 .MoveToLocation(endX, endY)

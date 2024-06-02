@@ -1,13 +1,13 @@
 using NUnit.Framework;
 using OpenQA.Selenium.Appium.Android;
 
-namespace YelpAutoTest
+namespace YelpAutoTest.Actions
 {
     public class ResultsManipulation
     {
-        private AndroidDriver _driver;
-        private int borderOffset = 20;
-        private int midleOfScreen = 100;
+        private AndroidDriver _driver; 
+        private readonly int _borderOffset = 20;
+        private readonly int _middleOfScreen = 100;
         
         public ResultsManipulation (AndroidDriver driver)
         {
@@ -16,9 +16,8 @@ namespace YelpAutoTest
         
         public void RestaurantsAreFilteredByDistanceInResultsPanel()
         {
-            //expand the search results panel
-           _driver.SwipeElementOnScreen(_driver.FindElement(Element.SearchResultPanelDivider()), 300, 50);
-           
+            ExpandSearchResultsArea();
+
             //get the search results panel and the quick filter panel coordinates for scrolling
             var resultsArea = _driver.FindElement(Element.SearchResultPanel());
             var filterArea = _driver.FindElement(Element.QuickFilterPanel());
@@ -29,7 +28,8 @@ namespace YelpAutoTest
             SkipPromotedResultItems(lowerYLimit, upperYLimit);
             
             //parse the results and get the distances
-            var restaurantsData = ParceResultsItems(upperYLimit);
+            var restaurantsData = ParseRestaurantInfoWhileScrollingList(upperYLimit);
+            
             var distances = new List<double>();
             foreach (var item in restaurantsData)
             {
@@ -47,7 +47,12 @@ namespace YelpAutoTest
             Assert.That(distances, Is.Ordered.Ascending);
         }
 
-        private List<Restaurant> ParceResultsItems(int scrollableResultAreaUpperYLimit)
+        private void ExpandSearchResultsArea()
+        {
+            _driver.SwipeElementOnScreen(_driver.FindElement(Element.SearchResultPanelDivider()), 300, 50);
+        }
+
+        private List<Restaurant> ParseRestaurantInfoWhileScrollingList(int scrollableResultAreaUpperYLimit)
         {
             List<Restaurant> restaurants = new List<Restaurant>();
 
@@ -61,7 +66,7 @@ namespace YelpAutoTest
                     // Scroll first found item to the top to avoid intersection with the previous one
                     _driver.SwipeElementOnScreen(
                         searchItems.First().FindElement(Element.SearchResultTileTitle()),
-                        midleOfScreen, scrollableResultAreaUpperYLimit - borderOffset
+                        _middleOfScreen, scrollableResultAreaUpperYLimit - _borderOffset
                     );
 
                     // Parse and add the restaurant details
@@ -76,7 +81,7 @@ namespace YelpAutoTest
                 // Scroll using the last tile divider to skip some promotions within the search results
                 _driver.SwipeElementOnScreen(
                     _driver.FindElements(Element.SearchResultTileDivider()).Last(),
-                    midleOfScreen, scrollableResultAreaUpperYLimit - borderOffset
+                    _middleOfScreen, scrollableResultAreaUpperYLimit - _borderOffset
                 );
 
                 // Break the loop if "Next 20 results" button is present
@@ -92,14 +97,14 @@ namespace YelpAutoTest
             for (int i = 0; i < 5; i++)
             {
                 // Scroll entire search result panel
-                _driver.SwipeScreenByCoordinates(midleOfScreen, scrollableResultAreaLowerYLimit - borderOffset, 
-                    midleOfScreen, scrollableResultAreaUpperYLimit);
+                _driver.SwipeScreenByCoordinates(_middleOfScreen, scrollableResultAreaLowerYLimit - _borderOffset, 
+                    _middleOfScreen, scrollableResultAreaUpperYLimit);
                
                 // Until All Results label is found and then scroll up carefully to not miss the first item
                 if (_driver.IsElementPresent(Element.Text("All Results")))
                 {
                     _driver.SwipeElementOnScreen(_driver.FindElement(Element.Text("All Results")), 
-                        midleOfScreen, scrollableResultAreaUpperYLimit);
+                        _middleOfScreen, scrollableResultAreaUpperYLimit);
                     
                     break;
                 }

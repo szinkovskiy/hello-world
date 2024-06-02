@@ -1,6 +1,6 @@
 using OpenQA.Selenium.Appium.Android;
 
-namespace YelpAutoTest
+namespace YelpAutoTest.Actions
 {
     public class Filtering
     {
