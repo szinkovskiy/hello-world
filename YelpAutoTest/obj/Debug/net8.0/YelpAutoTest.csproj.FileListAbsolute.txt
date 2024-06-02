@@ -105,3 +105,4 @@
 /Users/serhiizinkivskyi/RiderProjects/HelloWorld/YelpAutoTest/obj/Debug/net8.0/YelpAutoTest.pdb
 /Users/serhiizinkivskyi/RiderProjects/HelloWorld/YelpAutoTest/obj/Debug/net8.0/YelpAutoTest.genruntimeconfig.cache
 /Users/serhiizinkivskyi/RiderProjects/HelloWorld/YelpAutoTest/obj/Debug/net8.0/ref/YelpAutoTest.dll
+/Users/serhiizinkivskyi/RiderProjects/HelloWorld/YelpAutoTest/obj/Debug/net8.0/YelpAutoTest.sourcelink.json

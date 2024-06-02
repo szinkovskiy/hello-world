@@ -4,7 +4,8 @@ namespace YelpAutoTest
 {
     public class UiTests : BaseTest
     {
-        [Test]
+        [Test, Retry(2)]
+        [Category("UI")]
         public void RestaurantsShouldBeSortedByDistanceAscIfDistanceFilterWasApplied()
         {
             auth.AnonymousUserNavigatesToHomeScreen();

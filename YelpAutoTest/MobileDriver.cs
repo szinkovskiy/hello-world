@@ -79,14 +79,21 @@ namespace YelpAutoTest
             }
         }
         
-        public static void SwipeElementUp(this AndroidDriver driver, By by)
+        public static void SwipeElementOnScreen(this AndroidDriver driver, AppiumElement el, int endX, int endY)
         {
             new Actions(driver)
-                .MoveToElement(driver.FindElement(by))
-                .Pause(TimeSpan.FromSeconds(1))
+                .MoveToElement(el)
                 .ClickAndHold()
-                .Pause(TimeSpan.FromSeconds(1))
-                .MoveToLocation(300, 50)
+                .MoveToLocation(endX, endY)
+                .Perform();
+        }
+        
+        public static void SwipeScreenByCoordinates(this AndroidDriver driver, int startX, int startY, int endX, int endY)
+        {
+            new Actions(driver)
+                .MoveToLocation(startX, startY)
+                .ClickAndHold()
+                .MoveToLocation(endX, endY)
                 .Perform();
         }
     }
