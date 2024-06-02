@@ -4,7 +4,7 @@ namespace YelpAutoTest.Actions
 {
     public class Filtering
     {
-        private AndroidDriver _driver;
+        private readonly AndroidDriver _driver;
         
         public Filtering (AndroidDriver driver)
         {

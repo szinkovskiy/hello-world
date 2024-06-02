@@ -3,24 +3,18 @@ using OpenQA.Selenium.Appium.Android;
 
 namespace YelpAutoTest.Actions
 {
-    public class ResultsManipulation
+    public class ResultsManipulation(AndroidDriver driver)
     {
-        private AndroidDriver _driver; 
         private readonly int _borderOffset = 20;
         private readonly int _middleOfScreen = 100;
-        
-        public ResultsManipulation (AndroidDriver driver)
-        {
-            _driver = driver;
-        }
         
         public void RestaurantsAreFilteredByDistanceInResultsPanel()
         {
             ExpandSearchResultsArea();
 
             //get the search results panel and the quick filter panel coordinates for scrolling
-            var resultsArea = _driver.FindElement(Element.SearchResultPanel());
-            var filterArea = _driver.FindElement(Element.QuickFilterPanel());
+            var resultsArea = driver.FindElement(Element.SearchResultPanel());
+            var filterArea = driver.FindElement(Element.QuickFilterPanel());
             var upperYLimit = resultsArea.Location.Y + filterArea.Size.Height;
             var lowerYLimit = resultsArea.Location.Y + resultsArea.Size.Height;
 
@@ -49,7 +43,7 @@ namespace YelpAutoTest.Actions
 
         private void ExpandSearchResultsArea()
         {
-            _driver.SwipeElementOnScreen(_driver.FindElement(Element.SearchResultPanelDivider()), 300, 50);
+            driver.SwipeElementOnScreen(driver.FindElement(Element.SearchResultPanelDivider()), 300, 50);
         }
 
         private List<Restaurant> ParseRestaurantInfoWhileScrollingList(int scrollableResultAreaUpperYLimit)
@@ -59,12 +53,12 @@ namespace YelpAutoTest.Actions
             // Approximate number of iterations to scroll to the bottom of the search results
             for (int i = 0; i < 30; i++)
             {
-                var searchItems = _driver.FindElements(Element.SearchResultItemTile());
+                var searchItems = driver.FindElements(Element.SearchResultItemTile());
 
                 if (searchItems.Any())
                 {
                     // Scroll first found item to the top to avoid intersection with the previous one
-                    _driver.SwipeElementOnScreen(
+                    driver.SwipeElementOnScreen(
                         searchItems.First().FindElement(Element.SearchResultTileTitle()),
                         _middleOfScreen, scrollableResultAreaUpperYLimit - _borderOffset
                     );
@@ -79,13 +73,13 @@ namespace YelpAutoTest.Actions
                 }
 
                 // Scroll using the last tile divider to skip some promotions within the search results
-                _driver.SwipeElementOnScreen(
-                    _driver.FindElements(Element.SearchResultTileDivider()).Last(),
+                driver.SwipeElementOnScreen(
+                    driver.FindElements(Element.SearchResultTileDivider()).Last(),
                     _middleOfScreen, scrollableResultAreaUpperYLimit - _borderOffset
                 );
 
                 // Break the loop if "Next 20 results" button is present
-                if (_driver.IsElementPresent(Element.Button("Next 20 results"))) break;
+                if (driver.IsElementPresent(Element.Button("Next 20 results"))) break;
             }
 
             return restaurants;
@@ -97,13 +91,13 @@ namespace YelpAutoTest.Actions
             for (int i = 0; i < 5; i++)
             {
                 // Scroll entire search result panel
-                _driver.SwipeScreenByCoordinates(_middleOfScreen, scrollableResultAreaLowerYLimit - _borderOffset, 
+                driver.SwipeScreenByCoordinates(_middleOfScreen, scrollableResultAreaLowerYLimit - _borderOffset, 
                     _middleOfScreen, scrollableResultAreaUpperYLimit);
                
                 // Until All Results label is found and then scroll up carefully to not miss the first item
-                if (_driver.IsElementPresent(Element.Text("All Results")))
+                if (driver.IsElementPresent(Element.Text("All Results")))
                 {
-                    _driver.SwipeElementOnScreen(_driver.FindElement(Element.Text("All Results")), 
+                    driver.SwipeElementOnScreen(driver.FindElement(Element.Text("All Results")), 
                         _middleOfScreen, scrollableResultAreaUpperYLimit);
                     
                     break;

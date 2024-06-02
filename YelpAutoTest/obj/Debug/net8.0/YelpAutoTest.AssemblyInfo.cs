@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YelpAutoTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b967a9fb57e93f940a7c57309e2b4a7a750515f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6f71d6ff6f742b17f936d145928e5151c8dcc35")]
 [assembly: System.Reflection.AssemblyProductAttribute("YelpAutoTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YelpAutoTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

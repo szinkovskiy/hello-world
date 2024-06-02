@@ -7,12 +7,11 @@ namespace YelpAutoTest
 {
     public class MobileDriver
     {
-        protected AndroidDriver _driver;
+        //path to app installer
+        private const string PathToApp = "/Users/serhiizinkivskyi/Desktop/com.yelp.android_v24.21.0-28242113-28242113_Android-9.0.apk";
 
         public AndroidDriver RunApp()
         {
-            var serverUri = new Uri("http://127.0.0.1:4723");
-
             var driverOptions = new AppiumOptions()
             {
                 AutomationName = AutomationName.AndroidUIAutomator2,
@@ -20,19 +19,17 @@ namespace YelpAutoTest
                 DeviceName = "testArm", // emulator id
             };
 
-            driverOptions.App =
-                "/Users/serhiizinkivskyi/Desktop/com.yelp.android_v24.21.0-28242113-28242113_Android-9.0.apk";
+            driverOptions.App =PathToApp;
             driverOptions.AddAdditionalAppiumOption("appPackage", "com.yelp.android");
             driverOptions.AddAdditionalAppiumOption("appActivity", "com.yelp.android.home.ui.RootSingleActivity");
             driverOptions.AddAdditionalAppiumOption("fullReset", true);
 
-            return new AndroidDriver(serverUri, driverOptions, TimeSpan.FromSeconds(90));
+            return new AndroidDriver(new Uri("http://127.0.0.1:4723"), driverOptions, TimeSpan.FromSeconds(90));
         }
     }
 
     static class MobileDriverExtensions
     {
-
         public static void TapOn(this AndroidDriver driver, By by)
         {
             int attempts = 5;

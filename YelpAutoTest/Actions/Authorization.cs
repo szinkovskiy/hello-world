@@ -2,28 +2,21 @@ using OpenQA.Selenium.Appium.Android;
 
 namespace YelpAutoTest.Actions
 {
-    public class Autorization
+    public class Authorization(AndroidDriver driver)
     {
-        private AndroidDriver _driver;
-        
-        public Autorization (AndroidDriver driver)
-        {
-            _driver = driver;
-        }
-        
         public void AnonymousUserNavigatesToHomeScreen()
         {
-            _driver.TapOn(Element.Button("OK, I understand"));
-            _driver.TapOn(Element.Button("While using the app"));
-            _driver.TapOn(Element.Button("Allow"));
-            _driver.TapOn(Element.Button("CONTINUE"));
-            _driver.TapOn(Element.Icon("Navigate up"));
+            driver.TapOn(Element.Button("OK, I understand"));
+            driver.TapOn(Element.Button("While using the app"));
+            driver.TapOn(Element.Button("Allow"));
+            driver.TapOn(Element.Button("CONTINUE"));
+            driver.TapOn(Element.Icon("Navigate up"));
             
-            if (_driver.IsElementPresent(Element.CloseAlertIcon()))
-                _driver.TapOn(Element.CloseAlertIcon());
+            if (driver.IsElementPresent(Element.CloseAlertIcon()))
+                driver.TapOn(Element.CloseAlertIcon());
 
-            _driver.TapOn(Element.Text("Skip"));
-            _driver.WaitFor(() =>_driver.IsElementPresent(Element.Text("Search for burgers, delivery, barbers on Yelp")));
+            driver.TapOn(Element.Text("Skip"));
+            driver.WaitFor(() =>driver.IsElementPresent(Element.Text("Search for burgers, delivery, barbers on Yelp")));
         }
     }
 }
