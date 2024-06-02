@@ -34,7 +34,7 @@ namespace YelpAutoTest
             foreach (var item in restaurantsData)
             {
                 Console.WriteLine($"{item.Name} - {item.Distance}");
-                distances.Add(ParseNumberFromString(item.Distance));
+                distances.Add(ParseDistanceAndConvertItToMiles(item.Distance));
             }
             
             Console.WriteLine("==============================================");
@@ -106,7 +106,7 @@ namespace YelpAutoTest
             }
         }
         
-        private double ParseNumberFromString(string distance)
+        private double ParseDistanceAndConvertItToMiles(string distance)
         {
             const double feetToMiles = 0.0001894;
 
