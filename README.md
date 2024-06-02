@@ -1,6 +1,8 @@
 [https://www.youtube.com/watch?v=tRPbgKMW2hQ]
 (https://www.youtube.com/watch?v=tRPbgKMW2hQ)
 
+[![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=tRPbgKMW2hQ-Y "Everything Is AWESOME")
+
 ```
 1. Taco Bell - 400 ft
 2. Google Visitor Experience Cafe - 0.2 mi
